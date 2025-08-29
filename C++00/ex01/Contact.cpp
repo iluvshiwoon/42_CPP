@@ -9,6 +9,7 @@ Contact::Contact(const Contact& other) :
     _firstName(other._firstName),
     _lastName(other._lastName),
     _nickName(other._nickName),
+    _phoneNumber(other._phoneNumber),
     _darkestSecret(other._darkestSecret)
 {
 }
