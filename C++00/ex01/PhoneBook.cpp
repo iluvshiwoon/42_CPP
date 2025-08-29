@@ -55,7 +55,7 @@ void PhoneBook::displayContacts() const {
     }
 }
 
-void PhoneBook::displayContact(int& index)
+void PhoneBook::displayContact(const int& index) const
 {
     _contacts[index].displayContact();
 }

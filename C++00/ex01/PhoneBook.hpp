@@ -18,6 +18,6 @@ class PhoneBook {
         bool isValid(int& index) const;
         void addContact(Contact& contact);
         void displayContacts() const;
-        void displayContact(int& index);
+        void displayContact(const int& index) const;
 };
 #endif
