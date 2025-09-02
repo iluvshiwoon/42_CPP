@@ -48,7 +48,7 @@ void PhoneBook::displayContacts() const {
         << std::endl;
     for (int i = 0; i < _count; i++)
     {
-        std::cout << temp.formatField(std::to_string(i)) << "|" \
+        std::cout << "         " << i << "|" \
             << temp.formatField(_contacts[i].getFirstName()) << "|" \
             << temp.formatField(_contacts[i].getLastName()) << "|" \
             << temp.formatField(_contacts[i].getNickName()) << std::endl;
