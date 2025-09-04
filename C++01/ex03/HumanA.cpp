@@ -15,7 +15,7 @@ HumanA::HumanA(const HumanA& other) :
 HumanA& HumanA::operator=(const HumanA& rhs) {
     if (this != &rhs)
     {
-        _weapon = rhs._weapon;
+        _weapon.setType(rhs._weapon.getType());
         _name = rhs._name;
     }
     return *this;
