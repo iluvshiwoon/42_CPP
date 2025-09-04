@@ -3,20 +3,30 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 NAME = Human
 
+# Source files
 SRCS = main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
 
-OBJS = $(SRCS:.cpp=.o)
+# Object directory
+OBJ_DIR = obj
+
+# Object files with directory prefix
+OBJS = $(SRCS:%.cpp=$(OBJ_DIR)/%.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+# Create object directory if it doesn't exist
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
+
+$(NAME): $(OBJ_DIR) $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
 
-%.o: %.cpp
+# Rule to compile .cpp to .o in obj directory
+$(OBJ_DIR)/%.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	rm -f $(NAME)
