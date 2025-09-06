@@ -8,6 +8,8 @@ class Harl {
         void info(void) const;
         void warning(void) const;
         void error(void) const;
+        Harl(const Harl& other);
+        Harl& operator=(const Harl& rhs);
 
     public:
         Harl();

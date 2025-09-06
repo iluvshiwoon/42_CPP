@@ -2,6 +2,13 @@
 #include <iostream>
 
 Harl::Harl(){};
+Harl::Harl(const Harl& other){
+    (void)other;
+}
+Harl& Harl::operator=(const Harl& rhs){
+    (void)rhs;
+    return *this;
+}
 Harl::~Harl(){};
 
 void Harl::debug() const{

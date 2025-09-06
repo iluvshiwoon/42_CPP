@@ -4,7 +4,13 @@
 
 Harl::Harl(){};
 Harl::~Harl(){};
-
+Harl::Harl(const Harl& other){
+    (void)other;
+}
+Harl& Harl::operator=(const Harl& rhs){
+    (void)rhs;
+    return *this;
+}
 void Harl::debug() const{
     std::cout << "I love having extra bacon for my 7XL-double-cheese-triple-pickle-special-ketchup \
 burger. I really do!" << std::endl;
