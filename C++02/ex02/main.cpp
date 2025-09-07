@@ -3,11 +3,14 @@
 
 int main( void ) {
     Fixed a;
-    Fixed const b( 10 );
-    Fixed const c( 42.42f );
-    Fixed const d( b );
+    Fixed b;
+    Fixed c;
+    Fixed d;
 
-    a = Fixed( 1234.4321f );
+    a = Fixed(4.2f) * Fixed(2);
+    b = Fixed(10) + Fixed(20);
+    c = Fixed(5.5f) - Fixed(0.5f);
+    d = Fixed(10.10f) / Fixed(2.2f);
 
     std::cout << "a is " << a << std::endl;
     std::cout << "b is " << b << std::endl;

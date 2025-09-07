@@ -56,3 +56,55 @@ std::ostream& operator<<(std::ostream& os, const Fixed& fixed) {
   os << fixed.toFloat();
   return os;
 }
+
+bool Fixed::operator>(const Fixed& rhs) {
+    return _numberValue > rhs._numberValue;
+}
+
+bool Fixed::operator<(const Fixed& rhs) {
+    return _numberValue < rhs._numberValue;
+}
+
+bool Fixed::operator>=(const Fixed& rhs) {
+    return _numberValue >= rhs._numberValue;
+}
+
+bool Fixed::operator<=(const Fixed& rhs) {
+    return _numberValue <= rhs._numberValue;
+}
+
+bool Fixed::operator==(const Fixed& rhs) {
+    return _numberValue == rhs._numberValue;
+}
+
+bool Fixed::operator!=(const Fixed& rhs) {
+    return _numberValue != rhs._numberValue;
+}
+
+Fixed Fixed::operator+(const Fixed& rhs) {
+    Fixed rvalue;
+
+    rvalue.setRawBits(_numberValue + rhs._numberValue);
+    return rvalue;
+}
+
+Fixed Fixed::operator-(const Fixed& rhs) {
+    Fixed rvalue;
+
+    rvalue.setRawBits(_numberValue - rhs._numberValue);
+    return rvalue;
+}
+
+Fixed Fixed::operator*(const Fixed& rhs) {
+    Fixed rvalue;
+
+    rvalue.setRawBits((_numberValue * rhs._numberValue)>>_fractionalBits);
+    return rvalue;
+}
+
+Fixed Fixed::operator/(const Fixed& rhs) {
+    Fixed rvalue;
+
+    rvalue.setRawBits((_numberValue << _fractionalBits) / rhs._numberValue);
+    return rvalue;
+}
