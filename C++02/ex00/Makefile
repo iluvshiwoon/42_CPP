@@ -1,10 +1,10 @@
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
-NAME = harlFilter
+NAME = Fixed
 
 # Source files
-SRCS = main.cpp Harl.cpp
+SRCS = main.cpp Fixed.cpp
 
 # Object directory
 OBJ_DIR = obj
