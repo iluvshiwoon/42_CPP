@@ -22,10 +22,7 @@ FragTrap::FragTrap(const std::string name) :
 }
 
 FragTrap::FragTrap(const FragTrap& other) :
-    ClapTrap(other._name) {
-    this->_hitPoint = 100;
-    this->_energyPoint = 100;
-    this->_attackDamage = 30;
+    ClapTrap(other) {
 
     std::cout << "FragTrap copy constructor called" << std::endl;
 }

@@ -20,9 +20,8 @@ DiamondTrap::DiamondTrap(const std::string name) :
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap& other) :
-    ClapTrap(other._name + "_clap_name"), ScavTrap(other._name), FragTrap(other._name){
+    ClapTrap(other._name + "_clap_name"), ScavTrap(), FragTrap(){
     this->_name = other._name;
-    this->_energyPoint = 50;
 
     std::cout << "DiamondTrap copy constructor called" << std::endl;
 }
