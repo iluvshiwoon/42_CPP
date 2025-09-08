@@ -11,5 +11,10 @@ int main()
     robot.takeDamage(0);
     robot.beRepaired(0);
     Alien.beRepaired(0);
+
+    for (int i = 0; i < 10; i++)
+        Alien.attack("absolutly nothing");
+    Alien.takeDamage(10);
+    Alien.attack("absolutly nothing");
     return 0;
 }
