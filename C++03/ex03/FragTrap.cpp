@@ -71,6 +71,7 @@ void FragTrap::beRepaired(unsigned int amount) {
     {
         std::cout << "FragTrap " << _name << " got " << amount << " points of health back!" << std::endl;
         _energyPoint -= 1;
+        _hitPoint += amount;
     }
     else if (_hitPoint <= 0)
         std::cout << "FragTrap " << _name << " is dead :(" << std::endl;

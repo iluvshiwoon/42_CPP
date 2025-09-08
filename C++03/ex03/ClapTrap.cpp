@@ -63,6 +63,7 @@ void ClapTrap::beRepaired(unsigned int amount) {
     {
         std::cout << "ClapTrap " << _name << " got " << amount << " points of health back!" << std::endl;
         _energyPoint -= 1;
+        _hitPoint += amount;
     }
     else if (_hitPoint <= 0)
         std::cout << "ClapTrap " << _name << " is dead :(" << std::endl;

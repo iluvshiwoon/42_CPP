@@ -69,6 +69,7 @@ void DiamondTrap::beRepaired(unsigned int amount) {
     {
         std::cout << "DiamondTrap " << _name << " got " << amount << " points of health back!" << std::endl;
         _energyPoint -= 1;
+        _hitPoint += amount;
     }
     else if (_hitPoint <= 0)
         std::cout << "DiamondTrap " << _name << " is dead :(" << std::endl;

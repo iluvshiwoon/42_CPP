@@ -71,6 +71,7 @@ void ScavTrap::beRepaired(unsigned int amount) {
     {
         std::cout << "ScavTrap " << _name << " got " << amount << " points of health back!" << std::endl;
         _energyPoint -= 1;
+        _hitPoint += amount;
     }
     else if (_hitPoint <= 0)
         std::cout << "ScavTrap " << _name << " is dead :(" << std::endl;
