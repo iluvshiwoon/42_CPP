@@ -2,6 +2,8 @@
 # define AMATERIA_HPP
 # include <string>
 
+class ICharacter;
+
 class AMateria {
     protected:
         std::string _type;
@@ -12,8 +14,8 @@ class AMateria {
         AMateria& operator=(const AMateria& rhs);
         virtual ~AMateria();
         virtual AMateria* clone() const = 0;
-        // virtual void use(Icharacter& target);
-        std::string getType() const;
+        virtual void use(ICharacter& target);
+        const std::string& getType() const;
 };
 
 #endif // !AMATERIA_HPP

@@ -23,5 +23,5 @@ Ice::~Ice() {
 };
 
 Ice* Ice::clone() const {
-    return new Ice();
+    return new Ice(*this);
 }
