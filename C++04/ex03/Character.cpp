@@ -4,18 +4,23 @@
 #include <iostream>
 #include <string>
 
-Character::Character() : _inventory(), _trashHead(NULL) {
+Character::Character() : _trashHead(NULL) {
+    for (int i = 0; i < 4; i++) {
+        _inventory[i] = NULL;
+    }
     std::cout << "Default Character constructor called" << std::endl;
 }
 
-Character::Character(const std::string& name) : _name(name), _inventory(), _trashHead(NULL) {
+Character::Character(const std::string& name) : _name(name), _trashHead(NULL) {
+    for (int i = 0; i < 4; i++) {
+        _inventory[i] = NULL;
+    }
     std::cout << "Default Character string constructor called" << std::endl;
 }
 
-Character::Character(const Character& other) : _name(other._name), _inventory(), _trashHead(other._trashHead) {
+Character::Character(const Character& other) : _name(other._name), _trashHead(other._trashHead) {
     for (int i = 0; i < 4; i++) {
-        if (other._inventory[i] != NULL) 
-            this->_inventory[i] = other._inventory[i]->clone();
+            this->_inventory[i] = (other._inventory[i] != NULL) ? other._inventory[i]->clone() : NULL;
     }
     std::cout << "Default Character copy constructor called" << std::endl;
 }
@@ -23,19 +28,18 @@ Character::Character(const Character& other) : _name(other._name), _inventory(),
 Character& Character::operator=(const Character& rhs) {
     if (this != &rhs) {
         this->_name = rhs._name;
+
         while(this->_trashHead) {
             node* temp = this->_trashHead;
             this->_trashHead = this->_trashHead->next;
+            delete temp->material;
             delete temp;
         }
-        this->_trashHead = rhs._trashHead;
+
         for (int i = 0; i < 4; i++)
         {
             delete this->_inventory[i];
-            if (rhs._inventory[i] != NULL) 
-                 this->_inventory[i] = rhs._inventory[i]->clone();
-            else
-                this->_inventory[i] = NULL;
+            this->_inventory[i] = (rhs._inventory[i] != NULL) ? rhs._inventory[i]->clone() : NULL;
         }
     }
     std::cout << "Default Character copy assignment called" << std::endl;
@@ -46,6 +50,7 @@ Character::~Character() {
     while(this->_trashHead != NULL) {
             node* temp = this->_trashHead;
             this->_trashHead = this->_trashHead->next;
+            delete temp->material;
             delete temp;
     }
     for (int i = 0; i < 4; i++) {
@@ -62,8 +67,8 @@ void Character::equip(AMateria* m) {
     for (int i = 0; i < 4; i++) {
         if (this->_inventory[i] == NULL) {
             this->_inventory[i] = m;
-            break;
             std::cout << "Character equip called" << std::endl;
+            break;
         }
     }
 }
@@ -80,7 +85,7 @@ void Character::unequip(int idx) {
 }
 
 void Character::use(int idx, ICharacter& target) {
-    if (this->_inventory[idx] != NULL) {
+    if (idx >= 0 && idx < 4 && this->_inventory[idx] != NULL) {
         this->_inventory[idx]->use(target);
         std::cout << "Character use called" << std::endl;
     }
