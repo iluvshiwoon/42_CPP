@@ -4,15 +4,26 @@
 #include <iostream>
 
 int main() {
-    const Animal* j = new Dog();
-    const Animal* i = new Cat();
+    Animal * park[10];
 
-    delete j;
-    delete i;
+    for (int i = 0; i < 5; i++) {
+        park[i] = new Dog();
+        park[i]->makeSound();
+    }
+    for (int i = 5; i < 10; i++) {
+        park[i] = new Cat();
+        park[i]->makeSound();
+    }
+    for (int i = 0; i < 10; i++)
+        delete park[i];
 
-    Dog k;
-    Dog l(k);
+    Cat a;
+    Cat b;
+    std::cout << "a's brain address: " << a.getAddress() << std::endl;
+    std::cout << "b's brain address: " << b.getAddress() << std::endl;
+    a = b;
+    std::cout << "b's brain address: " << b.getAddress() << std::endl;
+    std::cout << "a's brain address after copy: " << a.getAddress() << std::endl;
 
-    k = l;
     return 0;
 }

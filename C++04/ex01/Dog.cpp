@@ -3,26 +3,23 @@
 #include "Brain.hpp"
 #include <iostream>
 
-Dog::Dog() : 
-    Animal() {
-    _brain = new Brain();
+Dog::Dog() : Animal() {
+    this->_brain = new Brain("bone");
     this->_type = "Dog";
     std::cout << "Default Dog constructor called" << std::endl;
 }
 
-Dog::Dog(const Dog& other) :
-    Animal(other) {
-    _brain = new Brain(*other._brain);
+Dog::Dog(const Dog& other) : Animal(other) {
+    this->_brain = new Brain(*other._brain);
     this->_type = other._type;
     std::cout << "Default Dog copy constructor called" << std::endl;
 }
 
 Dog& Dog::operator=(const Dog& rhs) {
-    if (this != &rhs)
-    {
+    if (this != &rhs) {
         delete this->_brain;
         this->_brain = new Brain(*rhs._brain);
-        _type = rhs._type;
+        this->_type = rhs._type;
     }
     std::cout << "Default Dog copy assignment called" << std::endl;
     return *this;
@@ -35,4 +32,8 @@ Dog::~Dog() {
 
 void Dog::makeSound() const {
     std::cout << "bark bark" << std::endl;
+}
+
+const Brain* Dog::getAddress() const {
+    return this->_brain;
 }
