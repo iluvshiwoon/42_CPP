@@ -9,7 +9,6 @@ class Cure : public AMateria {
         Cure& operator=(const Cure& rhs);
         ~Cure();
         Cure* clone() const;
-        // void use(Icharacter& target);
 };
 
 #endif // !Cure_HPP

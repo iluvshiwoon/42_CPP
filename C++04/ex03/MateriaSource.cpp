@@ -6,9 +6,10 @@ MateriaSource::MateriaSource() : _memory() {
     std::cout << "Default MateriaSource constructor called" << std::endl;
 }
 
-MateriaSource::MateriaSource(const MateriaSource& other) {
+MateriaSource::MateriaSource(const MateriaSource& other) : _memory() {
     for (int i = 0; i < 4; i++) {
-        this->_memory[i] = other._memory[i]->clone();
+        if (other._memory[i] != NULL)
+            this->_memory[i] = other._memory[i]->clone();
     }
     std::cout << "Default MateriaSource copy constructor called" << std::endl;
 }
@@ -17,7 +18,10 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& rhs) {
     if (this != &rhs) {
         for (int i = 0; i < 4; i++) {
             delete this->_memory[i];
-            this->_memory[i] = rhs._memory[i]->clone();
+            if (rhs._memory[i] != NULL)
+                this->_memory[i] = rhs._memory[i]->clone();
+            else
+                this->_memory[i] = NULL;
         }
         std::cout << "MateriaSource assigment operator called" << std::endl;
     }

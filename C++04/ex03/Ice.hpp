@@ -9,7 +9,6 @@ class Ice : public AMateria {
         Ice& operator=(const Ice& rhs);
         ~Ice();
         Ice* clone() const;
-        // void use(Icharacter& target);
 };
 
 #endif // !Ice_HPP
