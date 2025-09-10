@@ -18,7 +18,7 @@ Animal::Animal(const Animal& other) :
 
 Animal& Animal::operator=(const Animal& rhs) {
     if (this != &rhs)
-        _type = rhs._type;
+        this->_type = rhs._type;
     std::cout << "Default animal copy assignment called" << std::endl;
     return *this;
 }
@@ -32,5 +32,5 @@ void Animal::makeSound() const {
 }
 
 std::string Animal::getType() const {
-    return _type;
+    return this->_type;
 }

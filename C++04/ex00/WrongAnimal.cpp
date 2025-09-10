@@ -18,7 +18,7 @@ WrongAnimal::WrongAnimal(const WrongAnimal& other) :
 
 WrongAnimal& WrongAnimal::operator=(const WrongAnimal& rhs) {
     if (this != &rhs)
-        _type = rhs._type;
+        this->_type = rhs._type;
     std::cout << "Default WrongAnimal copy assignment called" << std::endl;
     return *this;
 }
@@ -32,5 +32,5 @@ void WrongAnimal::makeSound() const {
 }
 
 std::string WrongAnimal::getType() const {
-    return _type;
+    return this->_type;
 }

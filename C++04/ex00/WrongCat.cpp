@@ -16,7 +16,7 @@ WrongCat::WrongCat(const WrongCat& other) :
 
 WrongCat& WrongCat::operator=(const WrongCat& rhs) {
     if (this != &rhs)
-        _type = rhs._type;
+        this->_type = rhs._type;
     std::cout << "Default WrongCat copy assignment called" << std::endl;
     return *this;
 }

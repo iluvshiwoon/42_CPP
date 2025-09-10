@@ -16,7 +16,7 @@ Cat::Cat(const Cat& other) :
 
 Cat& Cat::operator=(const Cat& rhs) {
     if (this != &rhs)
-        _type = rhs._type;
+        this->_type = rhs._type;
     std::cout << "Default cat copy assignment called" << std::endl;
     return *this;
 }
