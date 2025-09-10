@@ -8,7 +8,8 @@ Character::Character() : _trashHead(NULL) {
     for (int i = 0; i < 4; i++) {
         _inventory[i] = NULL;
     }
-    std::cout << "Default Character constructor called" << std::endl; }
+    std::cout << "Default Character constructor called" << std::endl;
+}
 
 Character::Character(const std::string& name) : _name(name), _trashHead(NULL) {
     for (int i = 0; i < 4; i++) {
@@ -67,15 +68,13 @@ void Character::equip(AMateria* m) {
         if (this->_inventory[i] == NULL) {
             this->_inventory[i] = m;
             std::cout << "Character equip called" << std::endl;
-            return;
+            break;
         }
     }
-    delete m;
-    std::cout << "Character equip called but the inventory is full -> deleted m" << std::endl;
 }
 
 void Character::unequip(int idx) {
-    if (idx >= 0 && idx < 4 && _inventory[idx] != NULL) { 
+    if (_inventory[idx] != NULL) { 
         node* n = new node(); 
         n->material = this->_inventory[idx];
         n->next = _trashHead;
