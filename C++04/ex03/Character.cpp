@@ -17,7 +17,7 @@ Character::Character(const std::string& name) : _name(name), _trashHead(NULL) {
     std::cout << "Default Character string constructor called" << std::endl;
 }
 
-Character::Character(const Character& other) : _name(other._name), _trashHead(other._trashHead) {
+Character::Character(const Character& other) : _name(other._name), _trashHead(NULL) {
     for (int i = 0; i < 4; i++) {
             this->_inventory[i] = (other._inventory[i] != NULL) ? other._inventory[i]->clone() : NULL;
     }
