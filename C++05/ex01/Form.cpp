@@ -41,18 +41,18 @@ Form& Form::operator=(const Form& rhs) {
       _signed = rhs._signed;
    return *this;
 }
-std::string Form::getName() {
+std::string Form::getName() const{
    return _name;
 }
-bool Form::getSigned() {
+bool Form::getSigned() const{
    return _signed;
 }
 
-int Form::getGradeExecute() {
+int Form::getGradeExecute() const {
    return _executeGrade;
 }
 
-int Form::getGradeRequired() {
+int Form::getGradeRequired() const{
    return _requiredGrade;
 }
 
@@ -63,7 +63,7 @@ void Form::beSigned(const Bureaucrat& b) {
       _signed = true;
 }
 
-std::ostream& operator<<(std::ostream& os, Form& f) {
+std::ostream& operator<<(std::ostream& os, const Form& f) {
    std::cout << "Form: " << f.getName() << " is signed: " << f.getSigned() <<\
       " required grade to sign: " << f.getGradeRequired() << " required grade to execute: " << f.getGradeExecute();
    return os;

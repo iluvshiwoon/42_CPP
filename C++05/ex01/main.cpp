@@ -12,7 +12,7 @@ int main() {
       std::cout << b << std::endl;
    }
    catch(std::exception& e) {
-      std::cout << "Should not throw exception" << e.what() << std::endl;
+      std::cout << "Should not throw exception " << e.what() << std::endl;
    }
    try {
       Bureaucrat f("Franck", 149);
@@ -23,7 +23,7 @@ int main() {
       std::cout << b << std::endl;
    }
    catch(std::exception& e) {
-      std::cout << "Should not throw exception" << e.what() << std::endl;
+      std::cout << "Should not throw exception " << e.what() << std::endl;
    }
    try {
       Bureaucrat f("Franck", 151);
@@ -33,7 +33,7 @@ int main() {
       std::cout << b << std::endl;
    }
    catch(std::exception& e) {
-      std::cout << "Should throw exception" << e.what() << std::endl;
+      std::cout << "Should throw exception " << e.what() << std::endl;
    }
    try {
       Bureaucrat f("Franck", 150);
@@ -45,7 +45,7 @@ int main() {
       std::cout << b << std::endl;
    }
    catch(std::exception& e) {
-      std::cout << "Should throw exception" << e.what() << std::endl;
+      std::cout << "Should throw exception " << e.what() << std::endl;
    }
    Bureaucrat john("John", 4);
    Bureaucrat doe("Doe", 15);
@@ -54,21 +54,21 @@ int main() {
       john.signForm(chart);
    }
    catch (std::exception& e) {
-      std::cout << "Should not throw exception" << e.what() << std::endl;
+      std::cout << "Should not throw exception " << e.what() << std::endl;
    }
    try {
       Form chart("Chart", 5, 4);
       doe.signForm(chart);
    }
    catch (std::exception& e) {
-      std::cout << "Should throw exception" << e.what() << std::endl;
+      std::cout << "Should not throw exception " << e.what() << std::endl;
    }
    try {
       Form right("Right", 1, 1);
       Form wrong("Wrong", 0, 0);
    }
    catch (std::exception& e) {
-      std::cout << "Should throw exception" << e.what() << std::endl;
+      std::cout << "Should throw exception " << e.what() << std::endl;
    }
 
 }

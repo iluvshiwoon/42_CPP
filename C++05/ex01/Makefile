@@ -1,7 +1,7 @@
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g
 
-NAME = Bureaucrat
+NAME = Form
 
 # Source files
 SRCS = main.cpp Bureaucrat.cpp Form.cpp

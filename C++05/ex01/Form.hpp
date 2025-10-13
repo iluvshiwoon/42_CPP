@@ -15,11 +15,11 @@ class Form {
       Form(const Form& other);
       Form& operator=(const Form& rhs);
       ~Form();
-      std::string getName();
-      bool getSigned();
-      int getGradeRequired();
-      int getGradeExecute();
-      void beSigned(const Bureaucrat& b);
+      std::string getName() const;
+      bool getSigned() const;
+      int getGradeRequired() const;
+      int getGradeExecute() const;
+      void beSigned(const Bureaucrat& b) ;
       class GradeTooHighException : public std::exception {
          public:
             virtual const char* what() const throw() {
