@@ -32,21 +32,16 @@ int Bureaucrat::getGrade() const {
 }
 
 void Bureaucrat::increaseGrade() {
-   _grade-=1;
-   if (_grade < 1)
+   if (_grade - 1 < 1)
       throw GradeTooHighException();
-   else if (_grade > 150)
-      throw GradeTooLowException();
+   _grade-=1;
 }
 
 void Bureaucrat::decreaseGrade() {
-   _grade+=1;
-   if (_grade < 1)
-      throw GradeTooHighException();
-   else if (_grade > 150)
+   if (_grade + 1 > 150)
       throw GradeTooLowException();
+   _grade += 1;
 }
-
 void Bureaucrat::signForm(Form& f) {
    try {
       f.beSigned(*this);
