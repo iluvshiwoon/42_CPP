@@ -4,6 +4,8 @@
 #include <string>
 #include <iostream>
 
+class Form;
+
 class Bureaucrat {
    private:
       const std::string _name; 
@@ -29,6 +31,7 @@ class Bureaucrat {
                return "Grade too low";
             };
       };
+      void signForm(Form& f);
 };
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& b);
