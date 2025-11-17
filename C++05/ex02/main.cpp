@@ -13,61 +13,76 @@ int main() {
   std::srand(std::time(NULL));
   Bureaucrat john("John", 4);
   Bureaucrat doe("Doe", 150);
+  AForm *form = NULL;
   try {
-    AForm *form = new ShrubberyCreationForm("garden");
+    form = new ShrubberyCreationForm("garden");
     john.executeForm(*form);
+    delete form;
   } catch (std::exception &e) {
     std::cout << "Should throw exception " << e.what() << std::endl;
+    delete form;
   }
   std::cout << std::endl;
   try {
-    AForm *form = new ShrubberyCreationForm("garden");
+    form = new ShrubberyCreationForm("garden");
     john.signForm(*form);
     doe.executeForm(*form);
+    delete form;
   } catch (std::exception &e) {
     std::cout << "Should throw exception " << e.what() << std::endl;
+    delete form;
   }
   std::cout << std::endl;
   try {
-    AForm *form = new ShrubberyCreationForm("garden");
+    form = new ShrubberyCreationForm("garden");
     john.signForm(*form);
     john.executeForm(*form);
+    delete form;
   } catch (std::exception &e) {
     std::cout << "Should not throw exception " << e.what() << std::endl;
+    delete form;
   }
   std::cout << std::endl;
   try {
-    AForm *form = new PresidentialPardonForm("Pork");
+    form = new PresidentialPardonForm("Pork");
     john.signForm(*form);
     john.executeForm(*form);
+    delete form;
   } catch (std::exception &e) {
     std::cout << "Should not throw exception " << e.what() << std::endl;
+    delete form;
   }
   std::cout << std::endl;
   try {
-    AForm *form = new PresidentialPardonForm("Pork");
+    form = new PresidentialPardonForm("Pork");
     john.signForm(*form);
     doe.executeForm(*form);
+    delete form;
   } catch (std::exception &e) {
     std::cout << "Should throw exception " << e.what() << std::endl;
+    delete form;
   }
   std::cout << std::endl;
   try {
-    AForm *form = new RobotomyRequestForm("Tralalero");
+    form = new RobotomyRequestForm("Tralalero");
     john.signForm(*form);
     john.executeForm(*form);
     john.executeForm(*form);
     john.executeForm(*form);
     john.executeForm(*form);
+    delete form;
   } catch (std::exception &e) {
     std::cout << "Should not throw exception " << e.what() << std::endl;
+    delete form;
   }
   std::cout << std::endl;
   try {
-    AForm *form = new RobotomyRequestForm("Tralalero");
+    form = new RobotomyRequestForm("Tralalero");
     john.signForm(*form);
     doe.executeForm(*form);
+    delete form;
   } catch (std::exception &e) {
     std::cout << "Should throw exception " << e.what() << std::endl;
+    delete form;
   }
 }
