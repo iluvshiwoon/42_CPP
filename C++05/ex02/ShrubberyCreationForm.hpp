@@ -2,7 +2,6 @@
 #define SHRUBBERY_CREATION_FORM_HPP
 #include "AForm.hpp"
 #include <string>
-#endif
 
 class ShrubberyCreationForm : public AForm {
 private:
@@ -15,3 +14,4 @@ public:
   ShrubberyCreationForm &operator=(const ShrubberyCreationForm &rhs);
   ~ShrubberyCreationForm();
 };
+#endif

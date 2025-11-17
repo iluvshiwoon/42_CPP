@@ -2,7 +2,6 @@
 #define ROBOTOMY_REQUEST_FORM_HPP
 #include "AForm.hpp"
 #include <string>
-#endif
 
 class RobotomyRequestForm : public AForm {
 private:
@@ -15,3 +14,4 @@ public:
   RobotomyRequestForm &operator=(const RobotomyRequestForm &rhs);
   ~RobotomyRequestForm();
 };
+#endif

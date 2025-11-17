@@ -2,7 +2,6 @@
 #define PRESIDENTIAL_PARDON_FORM_HPP
 #include "AForm.hpp"
 #include <string>
-#endif
 
 class PresidentialPardonForm : public AForm {
 private:
@@ -15,3 +14,4 @@ public:
   PresidentialPardonForm &operator=(const PresidentialPardonForm &rhs);
   ~PresidentialPardonForm();
 };
+#endif
