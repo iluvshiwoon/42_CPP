@@ -18,12 +18,9 @@ ScalarConverter::e_type ScalarConverter::detectType(const std::string &input) {
     return ERROR;
   }
   char *endl;
-  errno = 0;
   strtod(input.c_str(), &endl);
-  if (errno != ERANGE) {
-    if (*endl == '\0' || *(endl + 1) == '\0')
-      return DOUBLE;
-  }
+  if (*endl == '\0' || (*endl == 'f' && *(endl + 1) == '\0'))
+    return DOUBLE;
   std::cerr << "Input is not of any supported types" << std::endl;
   return ERROR;
 };
@@ -56,7 +53,7 @@ void ScalarConverter::convert(const std::string &input) {
   else
     std::cout << static_cast<int>(val) << std::endl;
   std::cout << "float: ";
-  if (std::isnan(val) == false && std::isinf(false) &&
+  if (std::isnan(val) == false && std::isinf(val) == false &&
       std::abs(val) > std::numeric_limits<float>::max())
     std::cout << "impossible" << std::endl;
   else
