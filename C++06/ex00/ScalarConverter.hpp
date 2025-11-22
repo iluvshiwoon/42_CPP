@@ -7,7 +7,7 @@ private:
   ScalarConverter(const ScalarConverter &other);
   ScalarConverter &operator=(const ScalarConverter &rhs);
   ~ScalarConverter();
-  enum e_type { CHAR, INT, FLOAT, DOUBLE, ERROR };
+  enum e_type { CHAR, DOUBLE, ERROR };
   static e_type detectType(const std::string &input);
 
 public:
