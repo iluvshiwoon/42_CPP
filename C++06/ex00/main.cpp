@@ -12,6 +12,11 @@ int main(int argc, char **argv) {
   (void)argc;
   (void)argv;
   std::string test[] = {
+      " fie",
+      " ",
+      "42.0fx",
+      "f",
+      "34f ",
       "-inf",
       "inf",
       "nan",

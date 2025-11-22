@@ -1,7 +1,5 @@
 #include "ScalarConverter.hpp"
-#include "errno.h"
 #include <cctype>
-#include <cerrno>
 #include <cmath>
 #include <cstdlib>
 #include <iomanip>
