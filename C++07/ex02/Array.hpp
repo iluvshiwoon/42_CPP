@@ -1,0 +1,53 @@
+#ifndef ARRAY_HPP
+#define ARRAY_HPP
+#include <cstddef>
+template <typename T>
+
+class Array {
+private:
+  size_t _size;
+  T *_data;
+
+public:
+  Array();
+  Array(unsigned int n);
+  Array(const Array &other);
+  Array &operator=(const Array &rhs);
+  ~Array();
+
+  Array &operator[](const size_t i) const;
+  size_t size() const;
+};
+
+template <typename T> Array<T>::Array() : _size(0), _data(NULL) {}
+template <typename T> Array<T>::~Array() { delete[] _data; }
+
+template <typename T> Array<T>::Array(unsigned int n) : Array() {
+  _data = new T[n]();
+  _size = n;
+}
+
+template <typename T> Array<T>::Array(const Array &other) : Array() {
+  *this = other;
+}
+
+template <typename T> Array<T> &Array<T>::operator=(const Array &other) {
+  if (this != &other) {
+    T *temp;
+    if (other._data) {
+      temp = new T[other._size]();
+      for (size_t i = 0; i < other._size; i++)
+        temp[i] = other._data[i];
+      this->_size = other._size;
+      delete[] this->_data;
+      this->_data = temp;
+    } else {
+      delete[] this->_data;
+      this->_data = NULL;
+      this->_size = 0;
+    }
+  }
+  return *this;
+}
+
+#endif
