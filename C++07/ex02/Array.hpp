@@ -1,9 +1,9 @@
 #ifndef ARRAY_HPP
 #define ARRAY_HPP
 #include <cstddef>
-template <typename T>
+#include <exception>
 
-class Array {
+template <typename T> class Array {
 private:
   size_t _size;
   T *_data;
@@ -15,19 +15,21 @@ public:
   Array &operator=(const Array &rhs);
   ~Array();
 
-  Array &operator[](const size_t i) const;
+  T &operator[](const size_t i);
+  const T &operator[](const size_t i) const;
   size_t size() const;
 };
 
 template <typename T> Array<T>::Array() : _size(0), _data(NULL) {}
 template <typename T> Array<T>::~Array() { delete[] _data; }
 
-template <typename T> Array<T>::Array(unsigned int n) : Array() {
+template <typename T> Array<T>::Array(unsigned int n) : _size(0), _data(NULL) {
   _data = new T[n]();
   _size = n;
 }
 
-template <typename T> Array<T>::Array(const Array &other) : Array() {
+template <typename T>
+Array<T>::Array(const Array &other) : _size(0), _data(NULL) {
   *this = other;
 }
 
@@ -49,5 +51,19 @@ template <typename T> Array<T> &Array<T>::operator=(const Array &other) {
   }
   return *this;
 }
+
+template <typename T> T &Array<T>::operator[](const size_t i) {
+  if (i >= this->_size)
+    throw std::exception();
+  return this->_data[i];
+}
+
+template <typename T> const T &Array<T>::operator[](const size_t i) const {
+  if (i >= this->_size)
+    throw std::exception();
+  return this->_data[i];
+}
+
+template <typename T> size_t Array<T>::size() const { return this->_size; }
 
 #endif
