@@ -17,11 +17,11 @@ int main() {
   c[0] = 'a';
   c[1] = 'b';
   c[2] = 'c';
-  std::cout << "addr of c[2]: " << c[2] << std::endl;
+  std::cout << "c[2]: " << c[2] << std::endl;
 
   Array<char> c_cpy(c);
   c[2] = 'a';
-  std::cout << "addr of c_cpy[2]: " << c_cpy[2] << std::endl;
+  std::cout << "c_cpy[2]: " << c_cpy[2] << std::endl;
   Array<int> numbers(MAX_VAL);
   int *mirror = new int[MAX_VAL];
   srand(time(NULL));
