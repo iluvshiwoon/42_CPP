@@ -1,61 +1,88 @@
 #include "Array.hpp"
+#include <exception>
 #include <iostream>
 #include <stdlib.h>
 #define MAX_VAL 750
+#include <cstring>
+#include <iostream>
 
-int main() {
-  Array<int> a;
-  std::cout << "a's size: " << a.size() << std::endl;
-  try {
-    a[5];
-  } catch (std::exception &e) {
-    std::cout << "Tried a[5]: ";
-    std::cout << e.what() << std::endl;
+class heavyString {
+private:
+  char *buffer;
+
+public:
+  heavyString() : buffer(NULL) {}
+
+  explicit heavyString(const char *str) {
+    if (str) {
+      buffer = new char[strlen(str) + 1];
+      strcpy(buffer, str);
+    } else {
+      buffer = NULL;
+    }
+    std::cout << "[LOG] Constructor: Value \"" << (buffer ? buffer : "null")
+              << "\"" << std::endl;
   }
 
-  Array<char> c(3);
-  c[0] = 'a';
-  c[1] = 'b';
-  c[2] = 'c';
-  std::cout << "c[2]: " << c[2] << std::endl;
-
-  Array<char> c_cpy(c);
-  c[2] = 'a';
-  std::cout << "c_cpy[2]: " << c_cpy[2] << std::endl;
-  Array<int> numbers(MAX_VAL);
-  int *mirror = new int[MAX_VAL];
-  srand(time(NULL));
-  for (int i = 0; i < MAX_VAL; i++) {
-    const int value = rand();
-    numbers[i] = value;
-    mirror[i] = value;
-  }
-  // SCOPE
-  {
-    Array<int> tmp = numbers;
-    Array<int> test(tmp);
+  heavyString(const heavyString &other) {
+    if (other.buffer) {
+      buffer = new char[strlen(other.buffer) + 1];
+      strcpy(buffer, other.buffer);
+    } else {
+      buffer = NULL;
+    }
+    std::cout << "[LOG] Copy Constructor: Copied \""
+              << (buffer ? buffer : "null") << "\"" << std::endl;
   }
 
-  for (int i = 0; i < MAX_VAL; i++) {
-    if (mirror[i] != numbers[i]) {
-      std::cerr << "didn't save the same value!!" << std::endl;
-      return 1;
+  heavyString &operator=(const heavyString &other) {
+    std::cout << "[LOG] Assignment Op: Overwriting \""
+              << (buffer ? buffer : "null") << "\" with \""
+              << (other.buffer ? other.buffer : "null") << "\"" << std::endl;
+
+    if (this == &other)
+      return *this;
+
+    delete[] buffer;
+
+    if (other.buffer) {
+      buffer = new char[strlen(other.buffer) + 1];
+      strcpy(buffer, other.buffer);
+    } else {
+      buffer = NULL;
+    }
+    return *this;
+  }
+
+  ~heavyString() {
+    if (buffer) {
+
+      delete[] buffer;
     }
   }
-  try {
-    numbers[-2] = 0;
-  } catch (const std::exception &e) {
-    std::cerr << e.what() << '\n';
-  }
-  try {
-    numbers[MAX_VAL] = 0;
-  } catch (const std::exception &e) {
-    std::cerr << e.what() << '\n';
-  }
 
-  for (int i = 0; i < MAX_VAL; i++) {
-    numbers[i] = rand();
+  void print() const {
+    std::cout << "Value: " << (buffer ? buffer : "null") << std::endl;
   }
-  delete[] mirror; //
-  return 0;
+};
+
+int main() {
+  Array<heavyString> a;
+  std::cout << "Size: " << a.size() << " and Data: ";
+  try {
+    a[0].print();
+  } catch (std::exception &e) {
+    std::cout << e.what() << " Cause _data is NULL" << std::endl;
+  }
+  Array<heavyString> b(45);
+  std::cout << "Size: " << b.size() << " and Data: ";
+  try {
+    std::cout << "b[0]: ";
+    b[0].print();
+  } catch (std::exception &e) {
+    std::cout << "this shouldn't fail" << std::endl;
+  }
+  Array<heavyString> deep1(2);
+  deep1[0] = heavyString("test");
+  deep1[0].print();
 }
