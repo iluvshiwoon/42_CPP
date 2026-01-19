@@ -1,10 +1,8 @@
 #include "Array.hpp"
+#include <cstring>
 #include <exception>
 #include <iostream>
 #include <stdlib.h>
-#define MAX_VAL 750
-#include <cstring>
-#include <iostream>
 
 class heavyString {
 private:
@@ -84,5 +82,26 @@ int main() {
   }
   Array<heavyString> deep1(2);
   deep1[0] = heavyString("test");
-  deep1[0].print();
+  deep1[1] = heavyString("test1");
+  Array<heavyString> deep2(deep1);
+  deep2[1] = heavyString("...");
+  std::cout << "deep1[1] is: ";
+  deep1[1].print();
+  std::cout << "deep2[1] is: ";
+  deep2[1].print();
+  std::cout << std::endl;
+  try {
+    deep1[1] = heavyString("changed test1");
+    deep1[1].print();
+  } catch (std::exception &e) {
+    std::cout << "this shouldn't fail" << std::endl;
+  }
+  try {
+    const Array<heavyString> const_deep(1);
+    heavyString test = const_deep[0];
+    test = heavyString("test");
+    // const_deep[0] = heavyString("test");
+  } catch (std::exception &e) {
+    std::cout << "this shouldn't fail" << std::endl;
+  }
 }

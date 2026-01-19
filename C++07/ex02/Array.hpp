@@ -10,7 +10,7 @@ private:
 
 public:
   Array();
-  Array(unsigned int n);
+  explicit Array(unsigned int n);
   Array(const Array &other);
   Array &operator=(const Array &rhs);
   ~Array();
