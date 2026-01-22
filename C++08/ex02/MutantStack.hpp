@@ -9,6 +9,7 @@ public:
   MutantStack &operator=(const MutantStack &rhs) {
     if (this != &rhs)
       std::stack<T>::operator=(rhs);
+    return *this;
   };
   virtual ~MutantStack() {};
   typedef typename std::stack<T>::container_type::iterator iterator;
