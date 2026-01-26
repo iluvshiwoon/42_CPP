@@ -4,11 +4,19 @@
 #include <list>
 #include <vector>
 int main() {
-  std::cout << "Test: std::vector<int>" << std::endl;
   std::vector<int> a;
   a.push_back(10);
   a.push_back(11);
   a.push_back(12);
+  const std::vector<int> const_a(a);
+  std::cout << "Test: const std::vector<int>" << std::endl;
+  try {
+    std::vector<int>::const_iterator it = easyfind(const_a, 11);
+    std::cout << "Expect: 11 Got: " << *it << std::endl;
+  } catch (std::exception &e) {
+    std::cout << "Error: " << e.what() << std::endl;
+  }
+  std::cout << "Test: std::vector<int>" << std::endl;
   try {
     std::vector<int>::iterator it = easyfind(a, 11);
     std::cout << "Expect: 11 Got: " << *it << std::endl;
