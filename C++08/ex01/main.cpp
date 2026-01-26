@@ -5,7 +5,7 @@
 #include <iostream>
 int main() {
   std::cout << "SUBJECT MAIN\n" << std::endl;
-  Span sp = Span(5);
+  Span sp(5);
   sp.addNumber(6);
   sp.addNumber(3);
   sp.addNumber(17);

@@ -6,6 +6,13 @@
 Span::Span(unsigned int maxNum) : _maxNum(maxNum) {}
 Span::Span(const Span &other)
     : _maxNum(other._maxNum), _numbers(other._numbers) {}
+Span &Span::operator=(const Span &rhs) {
+  if (this != &rhs) {
+    this->_maxNum = rhs._maxNum;
+    this->_numbers = rhs._numbers;
+  }
+  return *this;
+}
 Span::~Span() {}
 void Span::addNumber(int value) {
   if (this->_numbers.size() >= this->_maxNum)
