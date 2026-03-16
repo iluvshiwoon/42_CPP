@@ -1,7 +1,7 @@
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
-NAME = easyfind
+NAME = btc
 
 # Source files
 SRCS = main.cpp
