@@ -4,9 +4,10 @@
 #include <string>
 class BitcoinExchange {
 private:
-  std::map<std::string, double> _database; // do I need Compare ?
-  void _load_database(std::string filename);
-  bool _is_valid_database();
+  std::map<std::string, float> _database;
+  void _load_database(const std::string &filename);
+  bool _check_date(int n, const std::string &date);
+  float _check_value(int n, const std::string &value);
 
 public:
   BitcoinExchange();

@@ -4,7 +4,7 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = btc
 
 # Source files
-SRCS = main.cpp
+SRCS = main.cpp BitcoinExchange.cpp
 
 # Object directory
 OBJ_DIR = obj
