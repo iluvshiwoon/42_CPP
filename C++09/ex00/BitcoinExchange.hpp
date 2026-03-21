@@ -7,7 +7,7 @@ private:
   std::map<std::string, float> _database;
   void _load_database(const std::string &filename);
   bool _check_date(int n, const std::string &date);
-  float _check_value(int n, const std::string &value);
+  bool _check_value(int n, const std::string &value, float &value_f);
 
 public:
   BitcoinExchange();
