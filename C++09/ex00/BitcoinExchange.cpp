@@ -2,13 +2,27 @@
 #include <fstream>
 #include <ios>
 #include <iostream>
+#include <map>
 #include <sstream>
 #include <stdexcept>
 #include <string>
 
-BitcoinExchange::BitcoinExchange() { _load_database("data.csv"); }
+BitcoinExchange::BitcoinExchange() {
+  _load_database("data.csv");
+  std::cout << this->_get_rate("2022-01-12") << std::endl;
+}
 
 BitcoinExchange::~BitcoinExchange() {};
+
+BitcoinExchange::BitcoinExchange(const BitcoinExchange &other)
+    : _database(other._database) {}
+
+BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &rhs) {
+  if (this != &rhs) {
+    this->_database = rhs._database;
+  }
+  return *this;
+}
 
 bool BitcoinExchange::_check_date(int n, const std::string &date) {
   int year = -1;
@@ -83,4 +97,14 @@ void BitcoinExchange::_load_database(const std::string &filename) {
   }
   if (n <= 1)
     throw std::runtime_error("Invalid csv");
+}
+
+float BitcoinExchange::_get_rate(const std::string &date) {
+  std::map<std::string, float>::iterator it = this->_database.lower_bound(date);
+  if (it->first == date)
+    return it->second;
+  else if (it == this->_database.begin() || it == this->_database.end())
+    throw std::out_of_range("no rates for that date\n");
+  --it;
+  return it->second;
 }

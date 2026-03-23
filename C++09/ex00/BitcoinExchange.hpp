@@ -8,6 +8,7 @@ private:
   void _load_database(const std::string &filename);
   bool _check_date(int n, const std::string &date);
   bool _check_value(int n, const std::string &value, float &value_f);
+  float _get_rate(const std::string &date);
 
 public:
   BitcoinExchange();
