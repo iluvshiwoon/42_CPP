@@ -115,7 +115,7 @@ void BitcoinExchange::_parse_file(const std::string &filename, int mode,
     }
   }
   if (mode == DB && n <= 1)
-    throw std::runtime_error("Invalid csv");
+    throw std::runtime_error("Invalid csv\n");
 }
 float BitcoinExchange::_get_rate(const std::string &date) {
   std::map<std::string, float>::iterator it = this->_database.lower_bound(date);
