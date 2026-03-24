@@ -9,7 +9,7 @@ int main(int argc, char **argv) {
       std::cerr << e.what();
     }
   else {
-    std::cerr << "No input file!\nUsage: ./btc <input>\n";
+    std::cerr << "Usage: ./btc <input>\n";
     return 1;
   }
 }
