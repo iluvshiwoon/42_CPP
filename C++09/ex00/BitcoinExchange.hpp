@@ -18,5 +18,7 @@ public:
   BitcoinExchange(const BitcoinExchange &other);
   BitcoinExchange &operator=(const BitcoinExchange &rhs);
   ~BitcoinExchange();
+
+  void evaluateInput(const std::string &filename);
 };
 #endif

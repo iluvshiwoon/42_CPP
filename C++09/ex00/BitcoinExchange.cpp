@@ -9,8 +9,11 @@
 #include <string>
 
 BitcoinExchange::BitcoinExchange(const std::string &filename) {
-  _parse_file("data.csv", DB, -1.0f, ",");
-  _parse_file(filename, INPUT, 1000.0f, " | ");
+  _parse_file(filename, DB, -1.0f, ",");
+}
+
+void BitcoinExchange::evaluateInput(const std::string &filename) {
+  this->_parse_file(filename, INPUT, 1000.0f, " | ");
 }
 
 BitcoinExchange::~BitcoinExchange() {};
@@ -44,7 +47,7 @@ bool BitcoinExchange::_check_date(int n, const std::string &date,
       if (day <= days[month - 1] && day >= 1)
         return true;
       else if (month == 2 && day == 29) {
-        if (year % 4 == 0 || (year % 100 == 0 && year % 400 == 0))
+        if (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0))
           return true;
       }
     }
