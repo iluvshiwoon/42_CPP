@@ -3,6 +3,7 @@
 #include <fstream>
 #include <ios>
 #include <iostream>
+#include <limits>
 #include <map>
 #include <sstream>
 #include <stdexcept>
@@ -109,7 +110,11 @@ void BitcoinExchange::_parse_file(const std::string &filename, int mode,
         _database[date] = value_f;
       else if (mode == INPUT) {
         try {
-          float result = _get_rate(date) * value_f;
+          double result = static_cast<double>(_get_rate(date)) *
+                          static_cast<double>(value_f);
+          if (result > std::numeric_limits<float>::max())
+            throw std::runtime_error(
+                " : price calculation resulted in float overflow\n");
           std::cout << date << " => " << value_f << " = " << result << "\n";
         } catch (std::exception &e) {
           std::cerr << "line " << n << " in " << filename << e.what();
