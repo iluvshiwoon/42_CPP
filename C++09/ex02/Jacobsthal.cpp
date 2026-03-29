@@ -1,35 +1,120 @@
-// #ifndef JACOBSTHAL_HPP
-// #define JACOBSTHAL_HPP
-// #include "CompareWinners.hpp"
-// #include <string>
-// static double Jn[] = {
-//     0,           1,           1,           3,           5,
-//     11,          21,          43,          85,          171,
-//     341,         683,         1365,        2731,        5461,
-//     10923,       21845,       43691,       87381,       174763,
-//     349525,      699051,      1.3981e+06,  2.7962e+06,  5.5924e+06,
-//     1.11848e+07, 2.23696e+07, 4.47392e+07, 8.94785e+07, 1.78957e+08,
-//     3.57914e+08, 7.15828e+08, 1.43166e+09, 2.86331e+09};
-//
-// class Jacobsthal {
-// private:
-//   std::vector<int> _toSort;
-//   std::vector<IteratorPair> _pairs;
-//
-// public:
-//   Jacobsthal(const std::string &toSort);
-//   Jacobsthal(const Jacobsthal &other);
-//   Jacobsthal &operator=(const Jacobsthal &rhs);
-//   ~Jacobsthal();
-// };
-// #endif
 #include "Jacobsthal.hpp"
+#include "CompareIterators.hpp"
+#include <algorithm>
+#include <iostream>
 #include <sstream>
+#include <stdexcept>
+#include <vector>
 
 Jacobsthal::Jacobsthal(const std::string &toSort) {
   std::istringstream ss(toSort);
-  std::string number;
+  int number;
 
   while (ss >> number) {
+    if (number < 0)
+      throw std::runtime_error("Argument contains negative number\n");
+    this->_toSort.push_back(number);
   }
 }
+
+void Jacobsthal::run() {
+  for (std::size_t i = 0; i < this->_toSort.size(); ++i) {
+    std::cout << this->_toSort[i] << ",";
+  }
+  std::cout << std::endl;
+
+  this->sortPairs(this->_toSort.begin(), this->_toSort.end(), 1);
+}
+
+void Jacobsthal::sortPairs(std::vector<int>::iterator begin,
+                           std::vector<int>::iterator end, int chunkSize) {
+  std::vector<std::vector<int>::iterator> mainChain;
+  std::vector<std::vector<int>::iterator> pends;
+  if (chunkSize >= end - begin)
+    return;
+
+  int chunkNumbers = (end - begin) / chunkSize;
+  std::cout << "chunkNumbers: " << chunkNumbers << std::endl;
+  int isOdd = chunkNumbers % 2;
+  std::vector<int>::iterator realEnd = end - isOdd * chunkSize;
+  std::cout << "isOdd: " << isOdd << std::endl;
+
+  for (std::vector<int>::iterator it = begin + chunkSize - 1; it < realEnd;
+       it += 2 * chunkSize) {
+    std::cout << "*it: " << *it << std::endl;
+    std::cout << "*it + chunkSize: " << *(it + chunkSize) << std::endl;
+    if (*it > *(it + chunkSize))
+      std::swap_ranges(it - (chunkSize - 1), it + 1, it + 1);
+  }
+  for (std::size_t i = 0; i < this->_toSort.size(); ++i) {
+    std::cout << this->_toSort[i] << ",";
+  }
+  std::cout << std::endl;
+
+  this->sortPairs(begin, end - isOdd * chunkSize, chunkSize * 2);
+
+  mainChain.push_back(begin);
+  for (std::vector<int>::iterator it = begin + chunkSize; it < realEnd;
+       it += 2 * chunkSize)
+    mainChain.push_back(it);
+  for (std::vector<int>::iterator it = begin + 2 * chunkSize; it < realEnd;
+       it += 2 * chunkSize)
+    pends.push_back(it);
+  if (realEnd < end)
+    pends.push_back(realEnd);
+  std::cout << "mainChain: ";
+  for (std::size_t i = 0; i < mainChain.size(); ++i) {
+    std::cout << *mainChain[i] << ",";
+  }
+  std::cout << std::endl;
+  std::cout << "pends: ";
+  for (std::size_t i = 0; i < pends.size(); ++i) {
+    std::cout << *pends[i] << ",";
+  }
+
+  if (!pends.empty()) {
+    int n = 3;
+    while (true) {
+      long long start_index = J[n] - 2;
+      long long end_index = J[n - 1] - 2;
+
+      if (start_index >= static_cast<long long>(pends.size()))
+        start_index = pends.size() - 1;
+
+      for (long long i = start_index; i > end_index; --i) {
+        std::vector<std::vector<int>::iterator>::iterator it =
+            pends.begin() + i;
+        std::vector<std::vector<int>::iterator>::iterator search_end;
+        if (*it + chunkSize < end)
+          search_end =
+              std::find(mainChain.begin(), mainChain.end(), *it + chunkSize);
+        else
+          search_end = mainChain.end();
+        std::vector<std::vector<int>::iterator>::iterator insert_here =
+            std::lower_bound(mainChain.begin(), search_end, *it,
+                             CompareIterator(chunkSize));
+        mainChain.insert(insert_here, *it);
+      }
+      n++;
+      if (end_index >= static_cast<long long>(pends.size() - 1))
+        break;
+    }
+  }
+
+  std::cout << std::endl;
+  std::cout << "mainChain AFTER: ";
+  for (std::size_t i = 0; i < mainChain.size(); ++i) {
+    std::cout << *mainChain[i] << ",";
+  }
+  std::cout << std::endl;
+  std::vector<int> temp;
+  for (std::size_t i = 0; i < mainChain.size(); ++i)
+    temp.insert(temp.end(), mainChain[i], mainChain[i] + chunkSize);
+  std::copy(temp.begin(), temp.end(), begin);
+  std::cout << "toSort AFTER: ";
+  for (std::size_t i = 0; i < this->_toSort.size(); ++i) {
+    std::cout << _toSort[i] << ",";
+  }
+  std::cout << std::endl;
+}
+Jacobsthal::~Jacobsthal() {};

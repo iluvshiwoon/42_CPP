@@ -4,7 +4,7 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 NAME = PmergeMe
 
 # Source files
-SRCS = main.cpp
+SRCS = main.cpp Jacobsthal.cpp
 
 # Object directory
 OBJ_DIR = obj
