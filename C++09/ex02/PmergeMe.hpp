@@ -26,11 +26,6 @@ private:
 
 public:
   PmergeMe(const std::string &toSort, bool debug = false) : _debug(debug) {
-    if (toSort.find_first_not_of("0123456789+ \t\n\v\f\r") !=
-        std::string::npos) {
-      throw std::runtime_error("Error: Invalid characters in input\n");
-    }
-
     std::istringstream ss(toSort);
 
     long long number;
@@ -48,9 +43,22 @@ public:
       if (this->_toSort.size() > 100000)
         throw std::runtime_error("Error: to many numbers, limit is 100000\n");
     }
+    if (ss.eof() == false)
+      throw std::runtime_error("Error: Argument contains invalid input\n");
   };
-  PmergeMe(const PmergeMe &other);
-  PmergeMe &operator=(const PmergeMe &rhs);
+
+  PmergeMe(const PmergeMe &other) : _debug(other._debug) {
+    this->_toSort = other._toSort;
+  };
+
+  PmergeMe &operator=(const PmergeMe &rhs) {
+    if (this != &rhs) {
+      this->_toSort = rhs._toSort;
+      this->_debug = rhs._debug;
+    }
+    return *this;
+  };
+
   ~PmergeMe() {};
 
   Container &getContainer() { return _toSort; };
